@@ -16,7 +16,28 @@ func main() {
 	menu := terminus.NewMenu(app)
 
 	menu.Title = `
-POST HYDRA
+
+       MMMMMMMMMMMMMMMMM?DMMOI:              INM8MMMMMMMMMMMMMMMMMM
+       MMMMMMMMMMMMMMMM~                         ,NMMMMMM:MMMMMMMMM
+       MMMMDNMNZMMON     ..              .8O~:ZM,   =MM.    $MMMMMM
+       MMM.     7N   I:      ,D        :.        .8   +Z      MMMMM
+       MM      N=   7          I.     Z            M   =MMM    NMMM
+       M,   MMM.   :            .    =              Z   .MM=   MMMM
+       M,   MM=   $ 8MMO         M   N MMMM,        O    $~   +$MMM
+       MM   .D    MNMMMMN        N   N?MMM N        Z     M  N8MMMM
+       MMM~ M     I.MMM$.        M   ..?MMM         $     ,M7MMMMMM
+       MMMMZM      +            =     ?            N       MMMMMMMM
+       MMMM8?       N          D =MMMM, 8         7        =ZMMMMMM
+       MMMMM          O.    .$= OMMMMMM   +MZ$N8            MMMMMMM
+       MMMMM                  .,  NMM~  I                   MMMMMMM
+       MMMMM                 .           .,                 MMMMMMM
+
+██████╗  ██████╗ ███████╗████████╗██╗  ██╗██╗   ██╗██████╗ ██████╗  █████╗ 
+██╔══██╗██╔═══██╗██╔════╝╚══██╔══╝██║  ██║╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+██████╔╝██║   ██║███████╗   ██║   ███████║ ╚████╔╝ ██║  ██║██████╔╝███████║
+██╔═══╝ ██║   ██║╚════██║   ██║   ██╔══██║  ╚██╔╝  ██║  ██║██╔══██╗██╔══██║
+██║     ╚██████╔╝███████║   ██║   ██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║
+╚═╝      ╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 `
 	menu.AddOption(&terminus.MenuOption{"About", about})
 	// TODO this should be based on the configured readers

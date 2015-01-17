@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/jcbwlkr/terminus"
 	"github.com/nsf/termbox-go"
-	"time"
 )
 
 func main() {
@@ -20,6 +19,8 @@ func main() {
 POST HYDRA
 `
 	menu.AddOption(&terminus.MenuOption{"About", about})
+	// TODO this should be based on the configured readers
+	menu.AddOption(&terminus.MenuOption{"Read Wild Apricot", readWildApricot})
 	menu.AddOption(terminus.NewExitOption("Quit"))
 
 	menu.Run()
@@ -27,11 +28,19 @@ POST HYDRA
 
 func about(app *terminus.App) int {
 	app.Clear()
+
 	app.DrawLine("Post Hydra!", 1, 1)
+	// TODO Provide better help text
 	app.DrawLine("This is an app!", 1, 3)
+	app.DrawLine("Press Enter to continue", 1, 5)
 	termbox.Flush()
 
-	time.Sleep(1 * time.Second)
+	app.WaitForEnter()
 
+	return terminus.Continue
+}
+
+func readWildApricot(app *terminus.App) int {
+	// TODO this should pull from WA and print options to the screen
 	return terminus.Continue
 }

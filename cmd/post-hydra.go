@@ -16,7 +16,6 @@ func main() {
 	menu := terminus.NewMenu(app)
 
 	menu.Title = `
-
        MMMMMMMMMMMMMMMMM?DMMOI:              INM8MMMMMMMMMMMMMMMMMM
        MMMMMMMMMMMMMMMM~                         ,NMMMMMM:MMMMMMMMM
        MMMMDNMNZMMON     ..              .8O~:ZM,   =MM.    $MMMMMM
@@ -32,14 +31,14 @@ func main() {
        MMMMM                  .,  NMM~  I                   MMMMMMM
        MMMMM                 .           .,                 MMMMMMM
 
-██████╗  ██████╗ ███████╗████████╗██╗  ██╗██╗   ██╗██████╗ ██████╗  █████╗ 
+██████╗  ██████╗ ███████╗████████╗██╗  ██╗██╗   ██╗██████╗ ██████╗  █████╗
 ██╔══██╗██╔═══██╗██╔════╝╚══██╔══╝██║  ██║╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
 ██████╔╝██║   ██║███████╗   ██║   ███████║ ╚████╔╝ ██║  ██║██████╔╝███████║
 ██╔═══╝ ██║   ██║╚════██║   ██║   ██╔══██║  ╚██╔╝  ██║  ██║██╔══██╗██╔══██║
 ██║     ╚██████╔╝███████║   ██║   ██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║
 ╚═╝      ╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 `
-	menu.AddOption(&terminus.MenuOption{"About", about})
+	menu.AddOption(&terminus.MenuOption{"About PostHydra", about})
 	// TODO this should be based on the configured readers
 	menu.AddOption(&terminus.MenuOption{"Read Wild Apricot", readWildApricot})
 	menu.AddOption(terminus.NewExitOption("Quit"))

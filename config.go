@@ -3,10 +3,7 @@ package posthydra
 import "code.google.com/p/gcfg"
 
 type Config struct {
-	WildApricot struct {
-		Key       string
-		AccountId string
-	}
+	WildApricot WildApricotConfig
 }
 
 func NewConfig(path string) (*Config, error) {

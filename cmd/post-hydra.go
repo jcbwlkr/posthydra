@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -95,6 +96,31 @@ func about(app *terminus.App) int {
 }
 
 func readWildApricot(app *terminus.App) int {
-	// TODO this should pull from WA and print options to the screen
+	app.Clear()
+
+	wa := posthydra.NewWildApricotClient(config)
+
+	app.DrawLine("Please wait while we fetch WA events ...", 1, 1)
+	termbox.Flush()
+
+	e, err := wa.Read()
+	app.Clear()
+
+	if err != nil {
+		app.DrawLine(fmt.Sprintf("Error! %s", err), 1, 1)
+		termbox.Flush()
+		app.WaitForEnter()
+		return terminus.Continue
+	}
+
+	app.DrawLine("Pick an event", 1, 1)
+	y := 3
+	for i, event := range e {
+		app.DrawLine(fmt.Sprintf("%d : %s", i+1, event.Title), 1, y)
+		y++
+	}
+	termbox.Flush()
+
+	app.WaitForEnter()
 	return terminus.Continue
 }

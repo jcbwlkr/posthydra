@@ -9,12 +9,9 @@ type Config struct {
 	}
 }
 
-func NewConfig(path string) *Config {
+func NewConfig(path string) (*Config, error) {
 	var cfg Config
 	err := gcfg.ReadFileInto(&cfg, path)
-	if err != nil {
-		panic(err)
-	}
 
-	return &cfg
+	return &cfg, err
 }

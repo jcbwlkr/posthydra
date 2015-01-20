@@ -33,10 +33,15 @@ func run(c *cli.Context) {
 	if c.String("config") == "" {
 		log.Fatalln("You must define a config with either --config or the environment variable POSTHYDRA_CONFIG")
 	}
-	config = posthydra.NewConfig(c.String("config"))
+	var err error
+
+	config, err = posthydra.NewConfig(c.String("config"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	if err := termbox.Init(); err != nil {
-		panic(err)
+		log.Fatalln(err)
 	}
 	defer termbox.Close()
 

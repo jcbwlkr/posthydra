@@ -1,11 +1,40 @@
 package main
 
 import (
+	"log"
+	"os"
+
+	"github.com/codegangsta/cli"
+	"github.com/jcbwlkr/posthydra"
 	"github.com/jcbwlkr/terminus"
 	"github.com/nsf/termbox-go"
 )
 
+var config *posthydra.Config
+
 func main() {
+	cliApp := cli.NewApp()
+	cliApp.Name = "PostHydra"
+	cliApp.Usage = "Read posts from one source and post them to others. Like a hydra."
+	cliApp.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:   "config, c",
+			Value:  "",
+			Usage:  "Path to the config file",
+			EnvVar: "POSTHYDRA_CONFIG",
+		},
+	}
+	cliApp.Action = run
+
+	cliApp.Run(os.Args)
+}
+
+func run(c *cli.Context) {
+	if c.String("config") == "" {
+		log.Fatalln("You must define a config with either --config or the environment variable POSTHYDRA_CONFIG")
+	}
+	config = posthydra.NewConfig(c.String("config"))
+
 	if err := termbox.Init(); err != nil {
 		panic(err)
 	}

@@ -1,12 +1,12 @@
 package posthydra
 
 import (
-	"bytes"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 type WildApricotConfig struct {
@@ -38,8 +38,8 @@ func (w *WildApricotClient) AcquireToken() error {
 	var res *http.Response
 	var err error
 
-	scope := []byte("grant_type=client_credentials&scope=events")
-	req, err = http.NewRequest("POST", "https://oauth.wildapricot.org/auth/token", bytes.NewBuffer(scope))
+	scope := strings.NewReader("grant_type=client_credentials&scope=events")
+	req, err = http.NewRequest("POST", "https://oauth.wildapricot.org/auth/token", scope)
 	req.Header.Set("Authorization", w.Config.TokenAuthHeader())
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
@@ -48,7 +48,7 @@ func (w *WildApricotClient) AcquireToken() error {
 		return err
 	}
 	if res.StatusCode != 200 {
-		return fmt.Errorf("Authenication request failed with status %s", res.Status)
+		return fmt.Errorf("Authentication request failed with status %s", res.Status)
 	}
 
 	defer res.Body.Close()
@@ -67,7 +67,7 @@ func (w *WildApricotClient) AcquireToken() error {
 	return nil
 }
 
-// Read peforms the work of fetching events from WildApricot's API
+// Read performs the work of fetching events from WildApricot's API
 func (w *WildApricotClient) Read() ([]*Event, error) {
 	// Our return values
 	e := make([]*Event, 0)

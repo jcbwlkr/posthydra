@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strings"
 )
@@ -51,12 +50,9 @@ func (w *WildApricotClient) AcquireToken() error {
 		return fmt.Errorf("Authentication request failed with status %s", res.Status)
 	}
 
-	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
 	js := make(map[string]interface{})
 
-	err = json.Unmarshal(body, &js)
-	if err != nil {
+	if err = json.NewDecoder(res.Body).Decode(&js); err != nil {
 		return err
 	}
 	if _, ok := js["access_token"]; !ok {
@@ -98,15 +94,10 @@ func (w *WildApricotClient) Read() ([]*Event, error) {
 	if res.StatusCode != 200 {
 		return e, fmt.Errorf("Events request failed with status %s", res.Status)
 	}
-	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return e, err
-	}
 
 	var waRes WildApricotResponse
-	err = json.Unmarshal(body, &waRes)
-	if err != nil {
+
+	if err = json.NewDecoder(res.Body).Decode(&waRes); err != nil {
 		return e, err
 	}
 
